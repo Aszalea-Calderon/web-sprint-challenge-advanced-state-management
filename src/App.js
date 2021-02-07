@@ -2,11 +2,12 @@ import React, { Component } from "react";
 
 import AddForm from "./components/AddForm";
 import SmurfDisplay from "./components/SmurfDisplay";
-import axios from "axios";
+//import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 //
+//axios.get("http://localhost:3333/smurfs").then((res) => console.log(res));
 
 class App extends Component {
   render() {
