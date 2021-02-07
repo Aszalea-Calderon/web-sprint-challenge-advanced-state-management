@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 
-//Needed depenencies
+//Needed dependency
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { reducer } from "./reducers/index";
 import thunk from "redux-thunk";
-//End Needed Dependinceies
+//End Needed dependency
 
 const { worker } = require("./mocks/browser");
 worker.start();
@@ -28,6 +28,6 @@ ReactDOM.render(
 
 //--COMPLETED--//
 //Task List:
-//1. Add in all necessary components and libary methods.
+//1. Add in all necessary components and library methods.
 //2. Create a store that includes thunk middleware support.
 //3. Wrap the App component in a react-redux Provider element.

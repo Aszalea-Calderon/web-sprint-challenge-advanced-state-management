@@ -8,7 +8,6 @@ export const CLEAR_ERROR = "CLEAR_ERROR";
 //export const SET_ERROR = "SET_ERROR";
 
 export const fetchSmurf = () => (dispatch) => {
-  dispatch({ type: CLEAR_ERROR });
   dispatch({ type: START_FETCHING });
 
   axios
@@ -23,11 +22,13 @@ export const fetchSmurf = () => (dispatch) => {
     });
 };
 
-const actions = {
-  fetchSmurf,
+export const addSmurf = (newSmurfInfo) => {
+  return { type: SMURF_RETRIEVED, payload: newSmurfInfo };
 };
 
-export default actions;
+export const setError = (errorMessage) => {
+  return { type: CLEAR_ERROR, payload: errorMessage };
+};
 
 //Task List:
 //1. Add fetch smurfs action:
@@ -41,4 +42,4 @@ export default actions;
 //              - dispatch an error text action if an request returns an error
 //3. Add set error text action:
 //              - return action object setting error text
-//4. Any other actions you deem nessiary to complete application.
+//4. Any other actions you deem necessary to complete application.

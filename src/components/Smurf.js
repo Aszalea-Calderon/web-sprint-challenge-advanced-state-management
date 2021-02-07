@@ -3,14 +3,26 @@ import React from "react";
 class Smurf extends React.Component {
   render() {
     const { smurf } = this.props;
-
+    console.log(smurf, "smurf");
     return (
-      <div data-testid="smurf" className="card">
-        <p>Smurf Name</p>
-        <p>Smurf position</p>
-        <p>Smurf Nickname</p>
-        <p>Smurf Description</p>
-      </div>
+      <>
+        <div data-testid="smurf" className="card">
+          <h3>Smurf's Name: {smurf.name}</h3>
+          <br />
+          <h4>
+            {smurf.name}'s Nickname: {smurf.nickname}
+          </h4>
+          <br />
+          <h4>
+            {smurf.nickname}'s Position: {smurf.position}
+          </h4>
+          <br />
+          <h4>
+            {smurf.nickname} description: {smurf.description}
+          </h4>
+          <br />
+        </div>
+      </>
     );
   }
 }
