@@ -1,62 +1,41 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addSmurf, setError } from "../actions/index";
+import { addSmurf } from "../actions/index";
+
+// const initialState = {
+
+// };
 
 class AddForm extends React.Component {
   state = {
-    name: "",
-    position: "",
-    nickname: "",
-    description: "",
+    newSmurf: {
+      name: "",
+      position: "",
+      nickname: "",
+      description: "",
+    },
   };
-
   handleChange = (e) => {
     this.setState({
       ...this.state,
-      [e.target.id]: e.target.value,
+      newSmurf: {
+        ...this.state.newSmurf,
+        [e.target.name]: e.target.value,
+      },
     });
   };
-  submitHandler = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
-
-    for (let i in this.props.smurfs) {
-      if (this.state.name === this.props.smurfs[i].name) {
-        alert("You are already in the system");
-        this.setState({
-          name: "",
-          position: "",
-          nickname: "",
-          description: "",
-        });
-      }
-    }
-    if (
-      this.state.name === "" ||
-      this.state.position === "" ||
-      this.state.nickname === ""
-    ) {
-      this.props.setError("You are missing something");
-    } else {
-      this.props.addSmurf(this.state);
-      this.setState({ name: "", position: "", nickname: "", description: "" });
-    }
+    this.props.addSmurf(this.state.newSmurf);
+    //this.setState(initialState);
   };
 
   render() {
+    console.log(this.state.newSmurf);
     return (
       <section>
         <h2>Add Smurf</h2>
-        <form onSubmit={this.submitHandler}>
-          {this.props.errorText ? (
-            <div
-              data-testid="errorAlert"
-              className="alert alert-danger"
-              role="alert"
-            >
-              Error: {this.props.errorText}
-            </div>
-          ) : null}
-          {/* //!NAME */}
+        <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name:</label>
             <br />
@@ -64,46 +43,43 @@ class AddForm extends React.Component {
               onChange={this.handleChange}
               name="name"
               id="name"
-              value={this.state.name}
+              value={this.state.newSmurf.name}
             />
-          </div>
-
-          {/* //!position */}
-          <div className="form-group">
             <label htmlFor="position">Position:</label>
             <br />
             <input
               onChange={this.handleChange}
               name="position"
               id="position"
-              value={this.state.position}
+              value={this.state.newSmurf.position}
             />
-          </div>
-
-          {/* //!nickname */}
-          <div className="form-group">
             <label htmlFor="nickname">Nickname:</label>
             <br />
             <input
               onChange={this.handleChange}
               name="nickname"
               id="nickname"
-              value={this.state.nickname}
+              value={this.state.newSmurf.nickname}
             />
-          </div>
-
-          {/* //!description */}
-          <div className="form-group">
             <label htmlFor="description">Description:</label>
             <br />
             <input
               onChange={this.handleChange}
               name="description"
               id="description"
-              value={this.state.description}
+              value={this.state.newSmurf.description}
             />
           </div>
 
+          {this.props.error && (
+            <div
+              data-testid="errorAlert"
+              className="alert alert-danger"
+              role="alert"
+            >
+              Error: {this.props.error}
+            </div>
+          )}
           <button>Submit Smurf</button>
         </form>
       </section>
@@ -113,12 +89,11 @@ class AddForm extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    ...state,
+    error: state.addError,
   };
 };
-const mapDispatchToProps = { addSmurf, setError };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddForm);
+export default connect(mapStateToProps, { addSmurf })(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.
@@ -134,3 +109,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(AddForm);
 //7. Ensure that the included alert code only displays when error text is passed in from redux.
 //4. DO NOT DELETE THE data-testid FIELD FROM THE ERROR ALERT! This is used for sprint grading.
 //8. Style as necessary.
+
+//You have redux state and component state, all the states have to be in sync, You have to make sure ALL the states are together.

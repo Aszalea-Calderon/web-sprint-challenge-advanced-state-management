@@ -10,13 +10,13 @@ class SmurfDisplay extends React.Component {
   render() {
     return (
       <>
-        <div>
-          {this.props.isLoading && <p>Loading...</p>}
-          <h1>--Smurf Village Database--</h1>
-          {this.props.smurfs.map((smurf) => {
-            return <Smurf smurf={smurf} />;
-          })}
-        </div>
+        {this.props.isLoading ? (
+          <h2>Loading Smurf Village...</h2>
+        ) : (
+          this.props.smurfs.map((smurf) => {
+            return <Smurf smurf={smurf} key={smurf.id} />;
+          })
+        )}
       </>
     );
   }

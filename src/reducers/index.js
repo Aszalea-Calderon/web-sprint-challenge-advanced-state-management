@@ -12,15 +12,18 @@ const initialState = {
 };
 
 export const reducer = (state = initialState, action) => {
+  console.log("reducer", action);
   switch (action.type) {
     case CLEAR_ERROR:
       return { ...state, error: "" };
     case START_FETCHING:
       return { ...state, isFetching: true, error: "" };
+
+    //Here think about how you are desling
     case SMURF_RETRIEVED: {
       return {
         ...state,
-        smurfs: action.payload,
+        smurfs: [...state.smurfs, action.payload],
         isFetching: false,
       };
     }
